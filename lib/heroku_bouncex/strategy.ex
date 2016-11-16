@@ -7,14 +7,22 @@ defmodule Heroku.Bouncex.OAuthStrategy do
 
   # Public API
 
-  defp client do
-    OAuth2.Client.new([
-      strategy: __MODULE__,
-      client_id: System.get_env("HEROKU_OAUTH_ID"),
-      client_secret: System.get_env("HEROKU_OAUTH_SECRET"),
-      redirect_uri: System.get_env("OAUTH_URL_CALLBACK"),
-      site: "https://id.heroku.com"
-    ])
+  @defaults [
+    strategy: __MODULE__,
+    site: "https://api.heroku.com",
+    authorize_url: "/oauth/authorize",
+    token_url: "/oauth/token",
+  ]
+
+  @doc """
+  Construct a client for requests to Heroku.
+  Optionally include any OAuth2 options here to be merged with the defaults.
+  """
+  def client(opts \\ []) do
+    opts = Keyword.merge(@defaults, Application.get_env(:heroku_bouncex, Heroku.Bouncex.OAuthStrategy))
+    |> Keyword.merge(opts)
+
+    OAuth2.Client.new(opts)
   end
 
   def authorize_url!(params \\ []) do
