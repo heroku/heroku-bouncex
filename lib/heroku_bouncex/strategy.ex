@@ -4,6 +4,7 @@ defmodule Heroku.Bouncex.OAuthStrategy do
   """
   use OAuth2.Strategy
   @behaviour Heroku.Bouncex.BouncexStrategy
+  require Logger
 
   # Public API
 
