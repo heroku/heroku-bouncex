@@ -44,7 +44,8 @@ defmodule Heroku.Bouncex.OAuthStrategy do
 
   def get_token(authorized_client, params, headers) do
     authorized_client
-    |> put_header("Accept", "application/json")
+    |> put_param(:client_secret, authorized_client.client_secret)
+    |> put_header("accept", "application/json")
     |> OAuth2.Strategy.AuthCode.get_token(params, headers)
   end
 end
