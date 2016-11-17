@@ -10,8 +10,8 @@ defmodule Heroku.Bouncex.OAuthStrategy do
   @defaults [
     strategy: __MODULE__,
     site: "https://api.heroku.com",
-    authorize_url: "/oauth/authorize",
-    token_url: "/oauth/token",
+    authorize_url: "https://id.heroku.com/oauth/authorize",
+    token_url: "https://id.heroku.com/oauth/token",
   ]
 
   @doc """
