@@ -36,8 +36,9 @@ defmodule Heroku.Bouncex.OAuthStrategy do
   end
 
   def get_user(code) do
-    token = OAuth2.Client.get_token!(client, code: code)
-    OAuth2.Client.get!(token, "/account").body
+    Logger.info("Code is #{code}")
+    #token = OAuth2.Client.get_token!(client, code: code)
+    #OAuth2.Client.get!(token, "/account").body
   end
 
   # Strategy Callbacks
